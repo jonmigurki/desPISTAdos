@@ -6,13 +6,66 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <Button
+        android:id="@+id/btnRegistrar"
+        android:layout_width="139dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="52dp"
+        android:text="Regístrate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnEntrar" />
+
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/txtTitulo"
+        android:layout_width="314dp"
+        android:layout_height="79dp"
+        android:layout_marginTop="48dp"
+        android:fontFamily="@font/aref_ruqaa"
+        android:gravity="center"
+        android:text="desPISTAdos"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="50sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <EditText
+        android:id="@+id/txtUsuario"
+        android:layout_width="269dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Usuario"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTitulo" />
+
+    <EditText
+        android:id="@+id/txtContrasena"
+        android:layout_width="269dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Contraseña"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtUsuario" />
+
+    <Button
+        android:id="@+id/btnEntrar"
+        android:layout_width="139dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="24dp"
+        android:text="Entrar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtContrasena" />
 </androidx.constraintlayout.widget.ConstraintLayout>
