@@ -12,13 +12,12 @@
         android:layout_height="36dp"
         android:layout_marginTop="16dp"
         android:gravity="center"
-        android:text="TextView"
+        android:text="Escoge una categoría"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Escoge una categoría" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
         android:id="@+id/lista1"
