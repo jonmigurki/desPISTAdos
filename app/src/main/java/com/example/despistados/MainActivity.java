@@ -66,5 +66,17 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        registrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //Nuevo formulario para rellenar usuario y contrasena
+
+                Intent i = new Intent(MainActivity.this, Registro.class);
+                startActivity(i);
+
+            }
+        });
+
     }
 }
