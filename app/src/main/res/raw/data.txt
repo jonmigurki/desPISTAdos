@@ -1,0 +1,19 @@
+Películas y series de TV;Personajes famosos;Países del mundo;Monumentos del mundo;Inventos y descubrimientos famosos
+
+Películas y series de TV
+Harry Potter;Aquí no hay quien viva;El rey león;La casa de papel;Titanic
+
+Harry Potter
+1;Saga de películas basadas en 7 libros
+2;Los protagonistas son 3 amigos
+3;Daniel Radcliffe interpreta al personaje principal
+4;Estudian en un colegio donde usan varita y escoba
+5;https://www.dondeir.com/wp-content/uploads/2020/06/donde-ver-todas-las-peliculas-de-harry-potter-en-linea.jpg
+
+Aquí no hay quien viva
+1;Serie española de principios de los 2000
+2;Es una serie con un elenco de muchos actores
+3;Los personajes viven en Desengaño 21
+4;Una de las frases más recordadas de uno de sus personajes es: “Un poquito de por favor”
+5;https://i.blogs.es/1b93f5/aqui-no-hay-quien-viva-predijo-todo/450_1000.jpg
+
