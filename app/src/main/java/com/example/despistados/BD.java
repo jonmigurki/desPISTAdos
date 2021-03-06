@@ -17,9 +17,19 @@ public class BD extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        db.execSQL("CREATE TABLE USUARIOS ('ID' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'USUARIO' VARCHAR(255) NOT NULL, 'CONTRASENA' VARCHAR(255) NOT NULL)");
+        db.execSQL("CREATE TABLE USUARIOS ('ID' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +     //Id 1, 2, 3, ...
+                "'USUARIO' VARCHAR(255) NOT NULL, " +                                               //Nombre del usuario
+                "'CONTRASENA' VARCHAR(255) NOT NULL, " +                                            //Contraseña del usuario
+                "'PUNTOS' INT NOT NULL, " +                                                        //Puntos del usuario
+                "'MONEDAS' INT NOT NULL, " +                                                        //Monedas del usuario
+                "'LOGROS' TEXT)");                                                                  //JSON que contendrá todos los niveles ya resueltos
 
-        db.execSQL("INSERT INTO USUARIOS ('USUARIO', 'CONTRASENA') VALUES ('admin', '1234')");
+        /*
+                { [ { categoria: 1, nivel: 1, pistas: 3 } ] , [ { categoria: 2, nivel: 1, pistas: 1 } ] , ... , [ {} ] }
+         */
+
+        db.execSQL("INSERT INTO USUARIOS ('USUARIO', 'CONTRASENA', 'PUNTOS', 'MONEDAS') VALUES ('admin', '1234', 0, 50)");
+
 
     }
 

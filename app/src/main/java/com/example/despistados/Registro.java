@@ -3,6 +3,7 @@ package com.example.despistados;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -50,7 +51,7 @@ public class Registro extends AppCompatActivity {
                 } else {
 
                     BD GestorDB = new BD(context, "BD", null, 1);
-                    SQLiteDatabase bd = GestorDB.getWritableDatabase();
+                    SQLiteDatabase bd = GestorDB.getReadableDatabase();
 
                     //Miramos en la BD
                     Cursor cursor = bd.rawQuery("SELECT USUARIO FROM USUARIOS WHERE USUARIO = '" + usuarioR.getText().toString() + "'", null);
@@ -67,6 +68,15 @@ public class Registro extends AppCompatActivity {
 
                         //REALIZAMOS EL REGISTRO
 
+                        GestorDB = new BD(context, "BD", null, 1);
+                        bd = GestorDB.getWritableDatabase();
+
+                        bd.execSQL("INSERT INTO USUARIOS(USUARIO, CONTRASENA, PUNTOS, MONEDAS) VALUES ('" + usuarioR.getText().toString() + "', '" + contrasenaR.getText().toString() + "', 0, 50)");
+
+                        Intent i = new Intent(Registro.this, Menu.class);
+                        i.putExtra("usuario", usuarioR.getText().toString());
+                        startActivity(i);
+                        finish();
 
                     }
                 }

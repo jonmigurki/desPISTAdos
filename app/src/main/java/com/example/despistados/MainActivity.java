@@ -54,7 +54,9 @@ public class MainActivity extends AppCompatActivity {
 
                 if (cursorCount > 0) {
                     Intent i = new Intent(MainActivity.this, Menu.class);
+                    i.putExtra("usuario", u);
                     startActivity(i);
+                    finish();
                 }else{
                     Toast.makeText(getApplicationContext(), "Has introducido mal algún campo. Vuelve a intentarlo.", Toast.LENGTH_SHORT).show();
 
