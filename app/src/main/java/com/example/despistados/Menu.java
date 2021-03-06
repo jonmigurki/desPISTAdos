@@ -3,14 +3,12 @@ package com.example.despistados;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -66,7 +64,7 @@ public class Menu extends AppCompatActivity {
         ArrayList<String> lc = new ArrayList<String>();
         String linea;
 
-        InputStream is = this.getResources().openRawResource(R.raw.data);
+        InputStream is = this.getResources().openRawResource(R.raw.data_ES);
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 
         String[] c = null;
