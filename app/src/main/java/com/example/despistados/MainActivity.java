@@ -2,7 +2,10 @@ package com.example.despistados;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -42,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                 String u = usuario.getText().toString();
                 String c = contrasena.getText().toString();
 
-                BD GestorDB = new BD (context, "BD", null, 1);
+                BD GestorDB = new BD(context, "BD", null, 1);
                 SQLiteDatabase bd = GestorDB.getWritableDatabase();
 
                 //Miramos en la BD
@@ -57,11 +60,10 @@ public class MainActivity extends AppCompatActivity {
                     i.putExtra("usuario", u);
                     startActivity(i);
                     finish();
-                }else{
+                } else {
                     Toast.makeText(getApplicationContext(), "Has introducido mal algún campo. Vuelve a intentarlo.", Toast.LENGTH_SHORT).show();
 
                 }
-
 
 
             }
@@ -81,4 +83,34 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+
+
+    public void onBackPressed() {
+
+        AlertDialog.Builder alertdialog=new AlertDialog.Builder(this);
+        alertdialog.setTitle("Salir");
+        alertdialog.setMessage("¿Estás segur@ de que quieres salir?");
+        alertdialog.setPositiveButton("Sí", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                MainActivity.super.onBackPressed();
+                finish();
+            }
+        });
+
+        alertdialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        alertdialog.show();
+
+    }
+
+
+
+
 }

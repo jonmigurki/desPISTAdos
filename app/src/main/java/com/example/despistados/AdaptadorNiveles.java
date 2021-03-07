@@ -7,31 +7,28 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-public class AdaptadorListView extends BaseAdapter {
-
+public class AdaptadorNiveles extends BaseAdapter {
 
     private Context contexto;
     private LayoutInflater inflater;
-    private String[] categorias;
+    private String[] niveles;
 
-    public AdaptadorListView(Context applicationContext, String[] c) {
-
-
+    public AdaptadorNiveles(Context applicationContext, String[] n) {
         contexto = applicationContext;
-        categorias = c;
+        niveles = n;
 
         inflater = (LayoutInflater) contexto.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
     }
+
 
     @Override
     public int getCount() {
-        return categorias.length;
+        return niveles.length;
     }
 
     @Override
     public Object getItem(int position) {
-        return categorias[position];
+        return niveles[position];
     }
 
     @Override
@@ -41,10 +38,9 @@ public class AdaptadorListView extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
         convertView=inflater.inflate(R.layout.fila,null);
         TextView categoria = (TextView) convertView.findViewById(R.id.etiqueta);
-        categoria.setText(categorias[position]);
+        categoria.setText("Nivel " + String.valueOf(position + 1));
 
         return convertView;
     }
