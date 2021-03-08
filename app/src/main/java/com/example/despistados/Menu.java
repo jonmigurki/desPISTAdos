@@ -132,11 +132,6 @@ public class Menu extends AppCompatActivity {
         cursor.close();
         GestorDB.close();
 
-
-
-
-
-
     }
 
 

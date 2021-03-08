@@ -25,7 +25,7 @@ public class BD extends SQLiteOpenHelper {
                 "'LOGROS' TEXT)");                                                                  //JSON que contendrá todos los niveles ya resueltos
 
         /*
-                { [ { categoria: 1, nivel: 1, pistas: 3 } ] , [ { categoria: 2, nivel: 1, pistas: 1 } ] , ... , [ {} ] }
+                { [ { categoria: 1, nivel: 1, pistas: 3, resuelto = "False"} ] , [ { categoria: 2, nivel: 1, pistas: 1 , resuelto = "True"} ] , ... , [ {} ] }
          */
 
         db.execSQL("INSERT INTO USUARIOS ('USUARIO', 'CONTRASENA', 'PUNTOS', 'MONEDAS') VALUES ('admin', '1234', 0, 50)");

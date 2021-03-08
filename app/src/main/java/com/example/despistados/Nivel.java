@@ -3,9 +3,13 @@ package com.example.despistados;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -43,6 +47,29 @@ public class Nivel extends AppCompatActivity {
         ListView lista = (ListView) findViewById(R.id.lista2);
         AdaptadorNiveles eladap= new AdaptadorNiveles(getApplicationContext(),niveles);
         lista.setAdapter(eladap);
+
+        //Cuando el usuario pulse en un nivel concreto, deberá de llevarle a la actividad Adivinanza
+        //donde tendrá que adivinar la palabra o frase. Tendré que pasarle el usuario identificado,
+        //la categoría y el nivel seleccionado.
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(Nivel.this, Adivinanza.class);
+                i.putExtra("usuario", usuario);
+                i.putExtra("categoria", categoria);
+
+                //En nivel tendré que guardar el nombre del nivel, no el identificador
+                //El View devuelve "Nivel X", necesito solamente sacar la X (el número) -> charAt(6)
+                String v = ((TextView)view.findViewById(R.id.etiqueta)).getText().toString();
+                String n = Character.toString(v.charAt(6));
+                int numero = Integer.valueOf(n);
+                i.putExtra("nivel", niveles[numero-1]);
+                i.putExtra("id_nivel", String.valueOf(numero));
+
+                startActivity(i);
+               // finish();   //¿¿¿¿¿¿¿FINISH????????
+            }
+        });
 
     }
 
