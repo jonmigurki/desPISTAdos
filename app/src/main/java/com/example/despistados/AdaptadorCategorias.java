@@ -42,7 +42,7 @@ public class AdaptadorCategorias extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        convertView=inflater.inflate(R.layout.fila,null);
+        convertView=inflater.inflate(R.layout.fila_categoria_nivel,null);
         TextView categoria = (TextView) convertView.findViewById(R.id.etiqueta);
         categoria.setText(categorias[position]);
 

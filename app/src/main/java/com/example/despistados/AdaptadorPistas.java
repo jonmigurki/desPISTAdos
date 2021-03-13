@@ -7,15 +7,15 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-public class AdaptadorNiveles extends BaseAdapter {
+public class AdaptadorPistas extends BaseAdapter {
 
     private Context contexto;
     private LayoutInflater inflater;
-    private String[] niveles;
+    private String[] pistas;
 
-    public AdaptadorNiveles(Context applicationContext, String[] n) {
+    public AdaptadorPistas(Context applicationContext, String[] n) {
         contexto = applicationContext;
-        niveles = n;
+        pistas = n;
 
         inflater = (LayoutInflater) contexto.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -23,12 +23,12 @@ public class AdaptadorNiveles extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return niveles.length;
+        return pistas.length;
     }
 
     @Override
     public Object getItem(int position) {
-        return niveles[position];
+        return pistas[position];
     }
 
     @Override
@@ -38,9 +38,9 @@ public class AdaptadorNiveles extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        convertView=inflater.inflate(R.layout.fila_categoria_nivel,null);
+        convertView=inflater.inflate(R.layout.fila_pista,null);
         TextView categoria = (TextView) convertView.findViewById(R.id.etiqueta);
-        categoria.setText("Nivel " + String.valueOf(position + 1));
+        categoria.setText(pistas[position]);
 
         return convertView;
     }

@@ -21,12 +21,14 @@ public class BD extends SQLiteOpenHelper {
                 "'USUARIO' VARCHAR(255) NOT NULL, " +                                               //Nombre del usuario
                 "'CONTRASENA' VARCHAR(255) NOT NULL, " +                                            //Contraseña del usuario
                 "'PUNTOS' INT NOT NULL, " +                                                        //Puntos del usuario
-                "'MONEDAS' INT NOT NULL, " +                                                        //Monedas del usuario
-                "'LOGROS' TEXT)");                                                                  //JSON que contendrá todos los niveles ya resueltos
+                "'MONEDAS' INT NOT NULL)");                                                       //Monedas del usuario
 
-        /*
-                { [ { categoria: 1, nivel: 1, pistas: 3, resuelto = "False"} ] , [ { categoria: 2, nivel: 1, pistas: 1 , resuelto = "True"} ] , ... , [ {} ] }
-         */
+       db.execSQL("CREATE TABLE LOGROS ('USUARIO' VARCHAR(255) NOT NULL," +                     //Nombre del usuario
+               "'CATEGORIA' INTEGER NOT NULL," +                                                //Categoría: 1, 2, 3...
+               "'NIVEL' INTEGER NOT NULL," +                                                    //Nivel: 1, 2, 3...
+               "'RESUELTO' INTEGER NOT NULL," +                                             //Resuelto: 0 si false, 1 si true
+               "'PISTAS' INTEGER NOT NULL)");                                           //Pistas que ha abierto: 1, 2, 3...5
+
 
         db.execSQL("INSERT INTO USUARIOS ('USUARIO', 'CONTRASENA', 'PUNTOS', 'MONEDAS') VALUES ('admin', '1234', 0, 50)");
 

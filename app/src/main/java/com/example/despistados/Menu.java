@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -73,6 +74,7 @@ public class Menu extends AppCompatActivity {
                 Intent i = new Intent(Menu.this, Nivel.class);
                 i.putExtra("categoria", ((TextView)view.findViewById(R.id.etiqueta)).getText().toString());
                 i.putExtra("usuario", user);
+                i.putExtra("num_categoria", String.valueOf(position+1));
 
                 startActivity(i);
 
