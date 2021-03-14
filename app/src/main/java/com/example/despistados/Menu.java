@@ -1,6 +1,7 @@
 package com.example.despistados;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -8,10 +9,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ScaleDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -26,6 +30,8 @@ public class Menu extends AppCompatActivity {
  //   String[] categorias = new String[5];
 
     TextView usuario, puntos, monedas;
+
+    Button compartir;
 
     Context context;
 
@@ -42,6 +48,21 @@ public class Menu extends AppCompatActivity {
 
         //Establecemos el contexto de la aplicación
         context = this.getApplicationContext();
+
+        compartir = (Button) findViewById(R.id.btnCompartir);
+        compartir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_SEND);
+                intent.putExtra(Intent.EXTRA_TEXT, "Estoy jugando a desPISTAdos y es súper entretenido. ¡Corre y descárgatelo!");
+                intent.setType("text/plain");
+                intent.setPackage("com.whatsapp");
+                startActivity(intent);
+
+            }
+        });
 
         //Accedemos al ListView y creamos el adaptador que visualizará las categorías cargadas
         ListView lista = (ListView) findViewById(R.id.lista1);

@@ -235,6 +235,22 @@ public class Adivinanza extends AppCompatActivity {
                                 }
                             });
 
+                            alertdialog.setNeutralButton("Compartir", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intent = new Intent();
+                                    intent.setAction(Intent.ACTION_SEND);
+                                    intent.putExtra(Intent.EXTRA_TEXT, "He adivinado el *nivel " + num_niv + "* de la categoría *" + cat + "* en desPISTAdos " +
+                                            "y me han dado *" + pm + " puntos y monedas*!! Intenta superarme xd!");
+                                    intent.setType("text/plain");
+                                    intent.setPackage("com.whatsapp");
+                                    startActivity(intent);
+
+                                        }
+                                    });
+
+
+
                             alertdialog.show();
 
                             puntosUsuario = puntosUsuario + pm;

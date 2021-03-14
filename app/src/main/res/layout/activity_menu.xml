@@ -21,8 +21,8 @@
 
     <ListView
         android:id="@+id/lista1"
-        android:layout_width="284dp"
-        android:layout_height="398dp"
+        android:layout_width="308dp"
+        android:layout_height="356dp"
         android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,4 +59,20 @@
         app:layout_constraintHorizontal_bias="0.87"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtPuntos" />
+
+    <Button
+        android:id="@+id/btnCompartir"
+        android:layout_width="172dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="28dp"
+        android:drawableLeft="@android:drawable/ic_dialog_email"
+        android:drawablePadding="@dimen/cardview_compat_inset_shadow"
+        android:scaleX="1"
+        android:scaleY="1"
+        android:text="Compartir"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.132"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lista1" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
