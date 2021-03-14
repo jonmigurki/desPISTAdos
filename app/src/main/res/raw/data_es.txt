@@ -8,12 +8,70 @@ Harry Potter
 2;Los protagonistas son 3 amigos
 3;Daniel Radcliffe interpreta al personaje principal
 4;Estudian en un colegio donde usan varita y escoba
-5;https://www.dondeir.com/wp-content/uploads/2020/06/donde-ver-todas-las-peliculas-de-harry-potter-en-linea.jpg
+5;Pulsa aquí para ver la imagen de la pista
 
 Aquí no hay quien viva
 1;Serie española de principios de los 2000
-2;Es una serie con un elenco de muchos actores
+2;Una de las series cómicas más famosas de España
 3;Los personajes viven en Desengaño 21
 4;Una de las frases más recordadas de uno de sus personajes es: “Un poquito de por favor”
-5;https://i.blogs.es/1b93f5/aqui-no-hay-quien-viva-predijo-todo/450_1000.jpg
+5;Pulsa aquí para ver la imagen de la pista
 
+El rey león
+1;Película de dibujos animados de 1994.
+2;Inspirada en Hamlet de William Shakespeare
+3;Los personajes son animales de la Sabana Africana
+4;Película creada por la famosa compañía Walt Disney
+5;Pulsa aquí para ver la imagen de la pista
+
+La casa de papel
+1;Serie española que Netflix acabó comprando
+2;Los personajes van disfrazados
+3;Los personajes pretenden llevarse algo de un edificio
+4;Los personajes usan la imagen de un famoso pintor español
+5;Pulsa aquí para ver la imagen de la pista
+
+Titanic
+1;Película que narra el acontecimiento de un hecho real de principios del siglo XX
+2;Mucha gente no sobrevivió al accidente
+3;Los personajes se encuentran en el Océano Atlántico
+4;Fue el mayor transatlántico del mundo una vez construido
+5;Pulsa aquí para ver la imagen de la pista
+
+Personajes famosos
+Michael Jackson;Albert Einstein;Marie Curie;Cleopatra;Wolfgang Amadeus Mozart
+
+Michael Jackson
+1;Cantante que comenzó en el mundo de la música junto a sus hermanos
+2;Uno de sus álbumes es el más vendido de la historia
+3;Murió el 25 de junio de 2009
+4;Padeció vitiligo
+5;Pulsa aquí para ver la imagen de la pista
+
+Albert Einstein
+1;Nació el 14 de marzo de 1879
+2;Murió a los 76 años
+3;Físico alemán de origen judío
+4;E=mc2
+5;Pulsa aquí para ver la imagen de la pista
+
+Marie Curie
+1;Científic@ polaca nacida en 1867
+2;Murió en 1934 a los 66 años
+3;Recibió dos premios Nobel en Física y Química
+4;Fue la descubridora del radio y el polonio
+5;Pulsa aquí para ver la imagen de la pista
+
+Cleopatra
+1;Nació en el año 69 a.C.
+2;Fue gobernante en el Antiguo Egipto
+3;Se dice que se suicidó dejándose morder por una cobra
+4;Fue interpretada por Elizabeth Taylor
+5;Pulsa aquí para ver la imagen de la pista
+
+Wolfgang Amadeus Mozart
+1;Es de origen austriaco.
+2;Murió a los 35 años.
+3;Uno de los músicos más importantes de la historia.
+4;Demostró su virtuosismo con el piano y el violín al componer obras a los 5 años.
+5;Pulsa aquí para ver la imagen de la pista

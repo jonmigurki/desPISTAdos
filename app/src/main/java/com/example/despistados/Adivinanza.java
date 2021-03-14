@@ -13,7 +13,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Button;
@@ -105,6 +107,33 @@ public class Adivinanza extends AppCompatActivity {
         ListView lista = (ListView) findViewById(R.id.lista3);
         AdaptadorPistas eladap= new AdaptadorPistas(getApplicationContext(),pistasAbiertas);
         lista.setAdapter(eladap);
+
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(position==4){
+
+                    ImageView image = new ImageView(Adivinanza.this);
+                    String i = "imagen" + num_cat + num_niv;
+                    int im = getResources().getIdentifier(i , "drawable", context.getPackageName());
+                    image.setImageResource(im);
+
+                    AlertDialog.Builder builder =
+                            new AlertDialog.Builder(Adivinanza.this).
+                                    setMessage("Imagen de la pista").
+                                    setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    }).
+                                    setView(image);
+                    builder.create().show();
+
+
+                }
+            }
+        });
 
 
         atras.setOnClickListener(new View.OnClickListener() {
@@ -248,7 +277,6 @@ public class Adivinanza extends AppCompatActivity {
 
                                         }
                                     });
-
 
 
                             alertdialog.show();
@@ -443,7 +471,6 @@ public class Adivinanza extends AppCompatActivity {
 
         String[] p = new String[5];
 
-        Log.d("estoooy aquiiii", "estyooo aqyiii");
 
         try {
             String linea = reader.readLine();
@@ -461,7 +488,7 @@ public class Adivinanza extends AppCompatActivity {
 
             }
 
-            for(int x = 0; x < 4; x++){
+            for(int x = 0; x < 5; x++){
 
                 linea = reader.readLine();
 
