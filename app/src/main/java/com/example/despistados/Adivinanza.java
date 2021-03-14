@@ -1,14 +1,18 @@
 package com.example.despistados;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 import android.app.AlertDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -35,7 +39,7 @@ public class Adivinanza extends AppCompatActivity {
 
     Context context;
 
-    String usuario, cat, num_cat, niv, num_niv;
+    String usuario, cat, num_cat, niv, num_niv, num_niveles;
 
     //Pistas que el usuario ha utilizado -> al comienzo 1
     int pistasUtilizadas = 1;
@@ -87,6 +91,7 @@ public class Adivinanza extends AppCompatActivity {
             num_cat = extras.getString("num_categoria");
             niv = extras.getString("nivel");
             num_niv = extras.getString("num_nivel");
+            num_niveles = extras.getString("num_niveles");
         }
 
         categoria.setText(cat.toString());
@@ -299,6 +304,14 @@ public class Adivinanza extends AppCompatActivity {
 
                             resuelto();
 
+
+
+                            //PRUEBA: NOTIFICACION CUANDO ACIERTO UNA ADIVINANZA
+
+                            mostrarNotificacion();
+
+
+
                         } else {
 
                             //Bajar teclado
@@ -499,8 +512,6 @@ public class Adivinanza extends AppCompatActivity {
 
             }
 
-            Log.d("pistas", p[0].toString() + "   " + p[1].toString());
-            Log.d("pistas", String.valueOf(p.length));
 
 
 
@@ -629,6 +640,66 @@ public class Adivinanza extends AppCompatActivity {
 
         cursor.close();
         GestorDB.close();
+
+
+    }
+
+
+//Método que se va a encargar de mostrar una notificacion si todos los niveles de una categoría han sido adivinados
+    private void mostrarNotificacion(){
+
+        BD GestorDB = new BD(context, "BD", null, 1);
+        SQLiteDatabase bd = GestorDB.getWritableDatabase();
+
+        //Miramos en la BD
+        Cursor cursor = bd.rawQuery("SELECT * FROM LOGROS WHERE USUARIO = '" + usuario + "' AND CATEGORIA = '" + num_cat + "' AND RESUELTO=1", null);
+
+        int cursorCount = cursor.getCount();
+        cursor.close();
+        GestorDB.close();
+
+        if (cursorCount == Integer.valueOf(num_niveles)) {
+
+            NotificationManager nm = (NotificationManager) getSystemService(context.NOTIFICATION_SERVICE);
+            NotificationCompat.Builder elBuilder = new NotificationCompat.Builder(context, "noti");
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                NotificationChannel elCanal = new NotificationChannel("noti", "noticategoria",
+                        NotificationManager.IMPORTANCE_DEFAULT);
+
+                nm.createNotificationChannel(elCanal);
+
+                elCanal.setDescription("Categoría finalizada");
+                elCanal.enableLights(true);
+                elCanal.setLightColor(Color.RED);
+                elCanal.setVibrationPattern(new long[]{0, 1000, 500, 1000});
+                elCanal.enableVibration(true);
+            }
+
+            elBuilder.setSmallIcon(R.mipmap.ic_launcher)
+                    .setContentTitle("desPISTAdos -- ¡ENHORABUENA!")
+                    .setContentText("¡Has finalizado la categoría! Te regalamos 20 monedas.")
+                    .setVibrate(new long[]{0, 1000, 500, 1000})
+                    .setAutoCancel(true);
+
+
+            nm.notify(12345, elBuilder.build());
+
+
+            monedasUsuario = monedasUsuario+20;
+
+            GestorDB = new BD (context, "BD", null, 1);
+            bd = GestorDB.getWritableDatabase();
+
+            bd.execSQL("UPDATE USUARIOS SET MONEDAS=" + monedasUsuario + " WHERE USUARIO='" + usuario + "'");
+
+
+            monedas.setText("Monedas: " + String.valueOf(monedasUsuario));
+
+
+
+        }
+
 
 
     }

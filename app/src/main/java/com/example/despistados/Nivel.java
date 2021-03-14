@@ -57,7 +57,6 @@ public class Nivel extends AppCompatActivity {
 
         String [] niveles = cargarNiveles(categoria);
 
-        Log.d("niveles", niveles[0] + niveles[1] + niveles[2]);
 
 
         //Accedemos al ListView y creamos el adaptador que visualizará los niveles cargados
@@ -83,6 +82,7 @@ public class Nivel extends AppCompatActivity {
                 int numero = Integer.valueOf(n);
                 i.putExtra("nivel", niveles[numero-1]);
                 i.putExtra("num_nivel", String.valueOf(numero));
+                i.putExtra("num_niveles", String.valueOf(niveles.length));
 
                 startActivity(i);
                // finish();   //¿¿¿¿¿¿¿FINISH????????

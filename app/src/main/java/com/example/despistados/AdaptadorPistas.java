@@ -1,6 +1,7 @@
 package com.example.despistados;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +42,7 @@ public class AdaptadorPistas extends BaseAdapter {
         convertView=inflater.inflate(R.layout.fila_pista,null);
         TextView categoria = (TextView) convertView.findViewById(R.id.etiqueta);
         categoria.setText(pistas[position]);
-
+        if(position==4){categoria.setTypeface(categoria.getTypeface(), Typeface.ITALIC);}
         return convertView;
     }
 }
