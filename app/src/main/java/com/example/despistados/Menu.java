@@ -1,7 +1,6 @@
 package com.example.despistados;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -9,10 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.ScaleDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -80,8 +76,8 @@ public class Menu extends AppCompatActivity {
         usuario = (TextView) findViewById(R.id.txtIdentificado);
         usuario.setText(u);
         user = u;
-        puntos = (TextView) findViewById(R.id.txtPuntos);
-        monedas = (TextView) findViewById(R.id.txtMonedas);
+        puntos = (TextView) findViewById(R.id.txtPuntos1);
+        monedas = (TextView) findViewById(R.id.txtMonedas1);
         mostrarPuntosYMonedas();
 
 
@@ -98,6 +94,8 @@ public class Menu extends AppCompatActivity {
                 i.putExtra("num_categoria", String.valueOf(position+1));
 
                 startActivity(i);
+
+                finish();
 
             }
         });
@@ -149,8 +147,8 @@ public class Menu extends AppCompatActivity {
             int p = cursor.getInt(cursor.getColumnIndex("PUNTOS"));
             int m = cursor.getInt(cursor.getColumnIndex("MONEDAS"));
 
-            puntos.setText("Puntos: " + String.valueOf(p));
-            monedas.setText("Monedas: " + String.valueOf(m));
+            puntos.setText(String.valueOf(p));
+            monedas.setText(String.valueOf(m));
         }
         cursor.close();
         GestorDB.close();
@@ -168,6 +166,8 @@ public class Menu extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
             //    Menu.super.onBackPressed();
+                Intent i = new Intent(Menu.this, MainActivity.class);
+                startActivity(i);
                 finish();
             }
         });

@@ -6,73 +6,84 @@
     android:layout_height="match_parent"
     tools:context=".Menu">
 
-    <TextView
-        android:id="@+id/txtElige"
-        android:layout_width="254dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="76dp"
-        android:gravity="center"
-        android:text="Escoge una categoría"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <ListView
-        android:id="@+id/lista1"
-        android:layout_width="338dp"
-        android:layout_height="356dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtElige" />
+        <LinearLayout
+            android:id="@+id/layoutNorte"
+            android:layout_width="match_parent"
+            android:layout_height="98dp"
+            android:background="#E3E6F4">
 
-    <TextView
-        android:id="@+id/txtIdentificado"
-        android:layout_width="95dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="16dp"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.146"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/txtIdentificado"
+                android:layout_width="190dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="0dp"
+                android:drawableLeft="@drawable/usuario"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/txtPuntos"
-        android:layout_width="133dp"
-        android:layout_height="23dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.866"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/txtPuntos1"
+                android:layout_width="91dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="0dp"
+                android:drawableLeft="@drawable/puntos"
+                android:gravity="center_vertical"
+                android:textSize="24sp" />
 
-    <TextView
-        android:id="@+id/txtMonedas"
-        android:layout_width="134dp"
-        android:layout_height="23dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.87"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPuntos" />
+            <TextView
+                android:id="@+id/txtMonedas1"
+                android:layout_width="79dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="0dp"
+                android:gravity="center_vertical"
+                android:textSize="24sp"
+                app:drawableLeftCompat="@drawable/monedas" />
+        </LinearLayout>
 
-    <Button
-        android:id="@+id/btnCompartir"
-        android:layout_width="172dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="28dp"
-        android:drawableLeft="@android:drawable/ic_dialog_email"
-        android:drawablePadding="@dimen/cardview_compat_inset_shadow"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:text="Compartir"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.132"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lista1" />
+        <LinearLayout
+            android:layout_width="363dp"
+            android:layout_height="540dp"
+            android:background="#C6C9DD"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtEligeN"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="Escoge una categoría"
+                android:textSize="14sp" />
+
+            <ListView
+                android:id="@+id/lista1"
+                android:layout_width="match_parent"
+                android:layout_height="331dp"
+                android:layout_marginTop="8dp">
+
+            </ListView>
+
+            <Button
+                android:id="@+id/btnCompartir"
+                android:layout_width="172dp"
+                android:layout_height="51dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="28dp"
+                android:background="#FFFFFF"
+                android:drawableLeft="@drawable/compartir"
+                android:scaleX="1"
+                android:scaleY="1"
+                android:text="Compartir"
+                app:backgroundTint="#3F51B5" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

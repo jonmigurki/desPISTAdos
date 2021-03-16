@@ -2,14 +2,16 @@ package com.example.despistados;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -17,7 +19,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 
 public class Nivel extends AppCompatActivity {
 
@@ -27,6 +28,7 @@ public class Nivel extends AppCompatActivity {
 
     TextView usuarioI, puntos, monedas;
 
+    Button atras, compartir;
 
     Context context;
 
@@ -35,10 +37,7 @@ public class Nivel extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nivel);
 
-        usuarioI = (TextView) findViewById(R.id.txtIdentificado);
-        usuarioI.setText(usuario);
 
-        //Obtenemos el usuario identificado y la categoría seleccionada
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             usuario = extras.getString("usuario");
@@ -46,12 +45,16 @@ public class Nivel extends AppCompatActivity {
             num_categoria = extras.getString("num_categoria");
         }
 
+        //Obtenemos el usuario identificado y la categoría seleccionada
+        usuarioI = (TextView) findViewById(R.id.txtIdentificado);
+        usuarioI.setText(usuario);
+
 
         //Establecemos el contexto de la aplicación
         context = this.getApplicationContext();
 
-        puntos = (TextView) findViewById(R.id.txtPuntos);
-        monedas = (TextView) findViewById(R.id.txtMonedas);
+        puntos = (TextView) findViewById(R.id.txtPuntos1);
+        monedas = (TextView) findViewById(R.id.txtMonedas1);
         mostrarPuntosYMonedas();
 
 
@@ -85,7 +88,35 @@ public class Nivel extends AppCompatActivity {
                 i.putExtra("num_niveles", String.valueOf(niveles.length));
 
                 startActivity(i);
-               // finish();   //¿¿¿¿¿¿¿FINISH????????
+               finish();
+            }
+        });
+
+
+        compartir = (Button) findViewById(R.id.btnCompartir);
+        compartir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_SEND);
+                intent.putExtra(Intent.EXTRA_TEXT, "Estoy jugando a desPISTAdos y es súper entretenido. ¡Corre y descárgatelo!");
+                intent.setType("text/plain");
+                intent.setPackage("com.whatsapp");
+                startActivity(intent);
+
+            }
+        });
+
+
+        atras = (Button) findViewById(R.id.btnAtras1);
+        atras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Nivel.this, Menu.class);
+                i.putExtra("usuario", usuario);
+                startActivity(i);
+                finish();
             }
         });
 
@@ -146,13 +177,42 @@ public class Nivel extends AppCompatActivity {
             int p = cursor.getInt(cursor.getColumnIndex("PUNTOS"));
             int m = cursor.getInt(cursor.getColumnIndex("MONEDAS"));
 
-            puntos.setText("Puntos: " + String.valueOf(p));
-            monedas.setText("Monedas: " + String.valueOf(m));
+            puntos.setText(String.valueOf(p));
+            monedas.setText(String.valueOf(m));
         }
         cursor.close();
         GestorDB.close();
 
     }
+
+
+    //Método que se encarga de visualizar un Dialog cuando el usuario le da al botón de atrás de su teléfono
+    public void onBackPressed() {
+
+        AlertDialog.Builder alertdialog=new AlertDialog.Builder(this);
+        alertdialog.setTitle("Salir");
+        alertdialog.setMessage("¿Estás segur@ de que quieres cerrar sesión?");
+        alertdialog.setPositiveButton("Sí", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //    Menu.super.onBackPressed();
+                Intent i = new Intent(Nivel.this, MainActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+
+        alertdialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        alertdialog.show();
+
+    }
+
 
 
 }

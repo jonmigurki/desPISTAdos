@@ -289,8 +289,8 @@ public class Adivinanza extends AppCompatActivity {
                             puntosUsuario = puntosUsuario + pm;
                             monedasUsuario = monedasUsuario + pm;
 
-                            puntos.setText("Puntos: " + String.valueOf(puntosUsuario));
-                            monedas.setText("Monedas: " + String.valueOf(monedasUsuario));
+                            puntos.setText(String.valueOf(puntosUsuario));
+                            monedas.setText(String.valueOf(monedasUsuario));
 
                             actualizarColorPuntos();
 
@@ -336,7 +336,7 @@ public class Adivinanza extends AppCompatActivity {
 
 
                             puntosUsuario = puntosUsuario - 2;
-                            puntos.setText("Puntos: " + String.valueOf(puntosUsuario));
+                            puntos.setText(String.valueOf(puntosUsuario));
 
                             actualizarColorPuntos();
 
@@ -371,7 +371,7 @@ public class Adivinanza extends AppCompatActivity {
     private void actualizarColorPuntos(){
 
         if(puntosUsuario<0){
-            puntos.setText("Puntos: " + String.valueOf(puntosUsuario));
+            puntos.setText(String.valueOf(puntosUsuario));
             puntos.setTextColor(Color.RED);
 
         }else{
@@ -400,8 +400,8 @@ public class Adivinanza extends AppCompatActivity {
             puntosUsuario = p;
             monedasUsuario = m;
 
-            puntos.setText("Puntos: " + String.valueOf(p));
-            monedas.setText("Monedas: " + String.valueOf(m));
+            puntos.setText(String.valueOf(p));
+            monedas.setText(String.valueOf(m));
         }
         cursor.close();
         GestorDB.close();
@@ -430,7 +430,6 @@ public class Adivinanza extends AppCompatActivity {
                 //a) Si están --> Saco el número de pistas que ha abierto
                 //b) Si no están --> Hago un INSERT para meter todos los datos
 
-        Log.d("HE ENTRADO AQUI", "holaaa");
 
         BD GestorDB = new BD (context, "BD", null, 1);
         SQLiteDatabase bd = GestorDB.getWritableDatabase();
@@ -449,8 +448,6 @@ public class Adivinanza extends AppCompatActivity {
             pistasUtilizadas = 1;
 
 
-            Log.d("estoy aqui 1", String.valueOf(pistasUtilizadas));
-
 
         }else{
 
@@ -459,7 +456,6 @@ public class Adivinanza extends AppCompatActivity {
 
                 pistasUtilizadas = pistas;
 
-                Log.d("estoy aqui 2", String.valueOf(pistasUtilizadas));
             }
 
         }
@@ -596,7 +592,7 @@ public class Adivinanza extends AppCompatActivity {
 
 
         monedasUsuario = monedasUsuario-20;
-        monedas.setText("Monedas: " + String.valueOf(monedasUsuario));
+        monedas.setText(String.valueOf(monedasUsuario));
 
 
         BD GestorDB = new BD (context, "BD", null, 1);
@@ -694,7 +690,7 @@ public class Adivinanza extends AppCompatActivity {
             bd.execSQL("UPDATE USUARIOS SET MONEDAS=" + monedasUsuario + " WHERE USUARIO='" + usuario + "'");
 
 
-            monedas.setText("Monedas: " + String.valueOf(monedasUsuario));
+            monedas.setText(String.valueOf(monedasUsuario));
 
 
 
@@ -703,6 +699,36 @@ public class Adivinanza extends AppCompatActivity {
 
 
     }
+
+
+
+    //Método que se encarga de visualizar un Dialog cuando el usuario le da al botón de atrás de su teléfono
+    public void onBackPressed() {
+
+        AlertDialog.Builder alertdialog=new AlertDialog.Builder(this);
+        alertdialog.setTitle("Salir");
+        alertdialog.setMessage("¿Estás segur@ de que quieres cerrar sesión?");
+        alertdialog.setPositiveButton("Sí", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //    Menu.super.onBackPressed();
+                Intent i = new Intent(Adivinanza.this, MainActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+
+        alertdialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        alertdialog.show();
+
+    }
+
 
 
 }

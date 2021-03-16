@@ -1,6 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">desPISTAdos</string>
-    <string name="titulo">desPISTAdos</string>
+    <string name="titulo" translatable="false">desPISTAdos</string>
     <string name="txtUsuario">Usuario</string>
     <string name="txtContrasena">Contraseña</string>
     <string name="btnEntrar">Entrar</string>

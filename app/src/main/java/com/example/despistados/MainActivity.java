@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     EditText contrasena;
     Context context;
 
+    Button ajustes;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +81,18 @@ public class MainActivity extends AppCompatActivity {
                 Intent i = new Intent(MainActivity.this, Registro.class);
                 startActivity(i);
 
+            }
+        });
+
+
+
+        ajustes = (Button) findViewById(R.id.btnAjustes);
+        ajustes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, Ajustes.class);
+                startActivity(i);
+                finish();
             }
         });
 

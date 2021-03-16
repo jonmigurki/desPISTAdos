@@ -56,7 +56,7 @@ Albert Einstein
 5;Pulsa aquí para ver la imagen pista
 
 Marie Curie
-1;Científic@ polaca nacida en 1867
+1;Científic polaca nacida en 1867
 2;Murió en 1934 a los 66 años
 3;Recibió dos premios Nobel en Física y Química
 4;Fue la descubridora del radio y el polonio
@@ -70,10 +70,10 @@ Cleopatra
 5;Pulsa aquí para ver la imagen pista
 
 Wolfgang Amadeus Mozart
-1;Es de origen austriaco.
-2;Murió a los 35 años.
-3;Uno de los músicos más importantes de la historia.
-4;Demostró su virtuosismo con el piano y el violín al componer obras a los 5 años.
+1;Es de origen austriaco
+2;Murió a los 35 años
+3;Uno de los músicos más importantes de la historia
+4;Demostró su virtuosismo con el piano y el violín al componer obras a los 5 años
 5;Pulsa aquí para ver la imagen pista
 
 Países del mundo
@@ -97,7 +97,7 @@ Japón
 1;Actualmente tiene más de 126 millones y medio de habitantes
 2;El grupo español Mecano le dedicó una canción en 1984
 3;Es un archipiélago
-4;Una de sus comidas más internacionales está compuesta de arroz y pescado.
+4;Una de sus comidas más internacionales está compuesta de arroz y pescado
 5;Pulsa aquí para ver la imagen pista
 
 Monumentos del mundo

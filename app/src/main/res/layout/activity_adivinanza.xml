@@ -6,116 +6,156 @@
     android:layout_height="match_parent"
     tools:context=".Adivinanza">
 
-    <EditText
-        android:id="@+id/txtRespuesta"
-        android:layout_width="177dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="28dp"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="Escribe tu respuesta"
-        android:inputType="textPersonName"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.062"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtNivel" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/txtCategoria"
-        android:layout_width="117dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/txtNivel"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPuntos1" />
+        <LinearLayout
+            android:id="@+id/layoutNorte"
+            android:layout_width="match_parent"
+            android:layout_height="98dp"
+            android:background="#E3E6F4">
 
-    <TextView
-        android:id="@+id/txtNivel"
-        android:layout_width="116dp"
-        android:layout_height="37dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/txtCategoria"
-        app:layout_constraintTop_toBottomOf="@+id/txtMonedas1" />
+            <TextView
+                android:id="@+id/txtIdentificado"
+                android:layout_width="190dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="0dp"
+                android:drawableLeft="@drawable/usuario"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:textSize="24dp"
+                android:textStyle="bold" />
 
-    <ListView
-        android:id="@+id/lista3"
-        android:layout_width="345dp"
-        android:layout_height="287dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtRespuesta" />
+            <TextView
+                android:id="@+id/txtPuntos1"
+                android:layout_width="91dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="0dp"
+                android:drawableLeft="@drawable/puntos"
+                android:gravity="center_vertical"
+                android:textSize="24dp" />
 
-    <TextView
-        android:id="@+id/txtPuntos1"
-        android:layout_width="101dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toStartOf="@+id/txtMonedas1"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/txtMonedas1"
+                android:layout_width="79dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="0dp"
+                android:drawableLeft="@drawable/monedas"
+                android:gravity="center_vertical"
+                android:textSize="24dp" />
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/txtMonedas1"
-        android:layout_width="108dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/txtPuntos1"
-        app:layout_constraintTop_toTopOf="parent" />
+        <LinearLayout
+            android:layout_width="363dp"
+            android:layout_height="540dp"
+            android:background="#C6C9DD"
+            android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnPista"
-        android:layout_width="80dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="312dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:text="Pista"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.476"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtRespuesta" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btnAtras"
-        android:layout_width="78dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="312dp"
-        android:text="Atrás"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.042"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtRespuesta" />
+                <TextView
+                    android:id="@+id/txtNivel"
+                    android:layout_width="116dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
 
-    <Button
-        android:id="@+id/btnResolver"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="312dp"
-        android:text="Resolver"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.956"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtRespuesta" />
+                <TextView
+                    android:id="@+id/txtCategoria"
+                    android:layout_width="117dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
 
-    <Button
-        android:id="@+id/btnComprobar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="148dp"
-        android:text="Comprobar"
-        android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.952"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="89dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/txtRespuesta"
+                    android:layout_width="234dp"
+                    android:layout_height="44dp"
+                    android:layout_marginTop="20dp"
+                    android:background="#54FFFFFF"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="Escribe tu respuesta"
+                    android:inputType="textPersonName"
+                    android:textSize="14sp" />
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5" />
+
+                <Button
+                    android:id="@+id/btnComprobar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="#8F4545"
+                    android:drawableLeft="@drawable/comprobar"
+                    android:text="Comprobar"
+                    android:textSize="10sp"
+                    app:backgroundTint="#3F51B5" />
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/lista3"
+                android:layout_width="345dp"
+                android:layout_height="287dp"
+                android:layout_marginTop="5dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnAtras"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="3"
+                    android:background="#3F51B5"
+                    android:drawableLeft="@drawable/atras"
+                    android:text="Atrás"
+                    android:textSize="10sp"
+                    app:backgroundTint="#3F51B5" />
+
+                <Button
+                    android:id="@+id/btnPista"
+                    android:layout_width="1dp"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="3"
+                    android:background="#3F51B5"
+                    android:drawableLeft="@drawable/pista"
+                    android:text="Pista"
+                    app:backgroundTint="#3F51B5" />
+
+                <Button
+                    android:id="@+id/btnResolver"
+                    android:layout_width="2dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="3"
+                    android:background="#3F51B5"
+                    android:drawableLeft="@drawable/resolver"
+                    android:text="Resolver"
+                    android:textSize="10sp"
+                    app:backgroundTint="#3F51B5" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
