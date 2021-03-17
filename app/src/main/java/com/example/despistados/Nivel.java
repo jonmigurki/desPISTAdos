@@ -60,11 +60,17 @@ public class Nivel extends AppCompatActivity {
 
         String [] niveles = cargarNiveles(categoria);
 
+        String idioma = "";
+        if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")){
+            idioma = "español";
+        }else{
+            idioma = "inglés";
+        }
 
 
-        //Accedemos al ListView y creamos el adaptador que visualizará los niveles cargados
+            //Accedemos al ListView y creamos el adaptador que visualizará los niveles cargados
         ListView lista = (ListView) findViewById(R.id.lista2);
-        AdaptadorNiveles eladap= new AdaptadorNiveles(getApplicationContext(),niveles);
+        AdaptadorNiveles eladap= new AdaptadorNiveles(getApplicationContext(),niveles,idioma);
         lista.setAdapter(eladap);
 
         //Cuando el usuario pulse en un nivel concreto, deberá de llevarle a la actividad Adivinanza
@@ -98,9 +104,17 @@ public class Nivel extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                String texto = "";
+
+                if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")){
+                    texto = "Estoy jugando a desPISTAdos y es súper entretenido. ¡Corre y descárgatelo!";
+                }else{
+                    texto = "I'm playing desPISTAdos and it's super entertaining. Go and download it!";
+                }
+
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_SEND);
-                intent.putExtra(Intent.EXTRA_TEXT, "Estoy jugando a desPISTAdos y es súper entretenido. ¡Corre y descárgatelo!");
+                intent.putExtra(Intent.EXTRA_TEXT, texto);
                 intent.setType("text/plain");
                 intent.setPackage("com.whatsapp");
                 startActivity(intent);
@@ -126,6 +140,11 @@ public class Nivel extends AppCompatActivity {
     private String[] cargarNiveles(String categoria) {
 
         InputStream is = this.getResources().openRawResource(R.raw.data_es);
+
+        if(String.valueOf(getResources().getConfiguration().locale).equals("en")){
+            is = this.getResources().openRawResource(R.raw.data_en);
+        }
+
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 
         String[] niveles = null;
@@ -189,10 +208,25 @@ public class Nivel extends AppCompatActivity {
     //Método que se encarga de visualizar un Dialog cuando el usuario le da al botón de atrás de su teléfono
     public void onBackPressed() {
 
+        String texto1 = "";
+        String texto2 = "";
+        String texto3 = "";
+
+        if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")){
+            texto1 = "Salir";
+            texto2 = "¿Estás segur@ de que quieres cerrar sesión?";
+            texto3 = "Sí";
+        }else{
+            texto1 = "Exit";
+            texto2 = "Are you sure you want to log out?";
+            texto3 = "Yes";
+        }
+
+
         AlertDialog.Builder alertdialog=new AlertDialog.Builder(this);
-        alertdialog.setTitle("Salir");
-        alertdialog.setMessage("¿Estás segur@ de que quieres cerrar sesión?");
-        alertdialog.setPositiveButton("Sí", new DialogInterface.OnClickListener(){
+        alertdialog.setTitle(texto1);
+        alertdialog.setMessage(texto2);
+        alertdialog.setPositiveButton(texto3, new DialogInterface.OnClickListener(){
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //    Menu.super.onBackPressed();

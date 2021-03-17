@@ -46,9 +46,19 @@ public class Registro extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (usuarioR.getText().toString().equals("") || contrasenaR.getText().toString().equals("")) {
+                String m1 = "";
+                String m2 = "";
+                if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")) {
+                    m1 = "Debes rellenar los dos campos";
+                    m2 = "Ya existe un usuario con ese nombre. Elige otro nombre";
+                }else{
+                    m1 = "You must write in both fields";
+                    m2 = "There's already another user with that name. Choose another one";
+                }
 
-                    Toast.makeText(getApplicationContext(), "Debes rellenar los dos campos.", Toast.LENGTH_SHORT).show();
+                    if (usuarioR.getText().toString().equals("") || contrasenaR.getText().toString().equals("")) {
+
+                    Toast.makeText(getApplicationContext(), m1, Toast.LENGTH_SHORT).show();
 
                 } else {
 
@@ -64,7 +74,7 @@ public class Registro extends AppCompatActivity {
 
                     if (cursorCount > 0) {
                         //Hay algun usuario con ese nombre en la BD
-                        Toast.makeText(getApplicationContext(), "Ya existe un usuario con ese nombre. Elige otro nombre.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), m2, Toast.LENGTH_SHORT).show();
 
                     } else {
 
@@ -93,15 +103,32 @@ public class Registro extends AppCompatActivity {
 
 
 
+    //Método que se encarga de visualizar un Dialog cuando el usuario le da al botón de atrás de su teléfono
     public void onBackPressed() {
 
+        String texto1 = "";
+        String texto2 = "";
+        String texto3 = "";
+
+        if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")){
+            texto1 = "Salir";
+            texto2 = "¿Estás segur@ de que quieres cerrar sesión?";
+            texto3 = "Sí";
+        }else{
+            texto1 = "Exit";
+            texto2 = "Are you sure you want to log out?";
+            texto3 = "Yes";
+        }
+
         AlertDialog.Builder alertdialog=new AlertDialog.Builder(this);
-        alertdialog.setTitle("Salir");
-        alertdialog.setMessage("¿Estás segur@ de que quieres salir?");
-        alertdialog.setPositiveButton("Sí", new DialogInterface.OnClickListener(){
+        alertdialog.setTitle(texto1);
+        alertdialog.setMessage(texto2);
+        alertdialog.setPositiveButton(texto3, new DialogInterface.OnClickListener(){
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Registro.super.onBackPressed();
+                //    Menu.super.onBackPressed();
+                Intent i = new Intent(Registro.this, MainActivity.class);
+                startActivity(i);
                 finish();
             }
         });
@@ -116,6 +143,7 @@ public class Registro extends AppCompatActivity {
         alertdialog.show();
 
     }
+
 
 
 }

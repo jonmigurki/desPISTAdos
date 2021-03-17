@@ -12,10 +12,12 @@ public class AdaptadorNiveles extends BaseAdapter {
     private Context contexto;
     private LayoutInflater inflater;
     private String[] niveles;
+    private String idioma;
 
-    public AdaptadorNiveles(Context applicationContext, String[] n) {
+    public AdaptadorNiveles(Context applicationContext, String[] n, String i) {
         contexto = applicationContext;
         niveles = n;
+        idioma = i;
 
         inflater = (LayoutInflater) contexto.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -40,8 +42,14 @@ public class AdaptadorNiveles extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView=inflater.inflate(R.layout.fila_categoria_nivel,null);
         TextView categoria = (TextView) convertView.findViewById(R.id.etiqueta);
-        categoria.setText("Nivel " + String.valueOf(position + 1));
 
-        return convertView;
+        if(idioma.equals("español")){
+            categoria.setText("Nivel " + String.valueOf(position + 1));
+        }else{
+            categoria.setText("Level " + String.valueOf(position + 1));
+        }
+
+
+            return convertView;
     }
 }

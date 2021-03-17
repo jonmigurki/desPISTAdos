@@ -33,7 +33,7 @@ public class Ajustes extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                AlertDialog.Builder b = new AlertDialog.Builder(Ajustes.this.getApplicationContext());
+                AlertDialog.Builder b = new AlertDialog.Builder(Ajustes.this);
                 b.setTitle("Cambiar idioma");
 
                 String[] idiomas = {"Español", "English"};

@@ -33,7 +33,7 @@ import java.util.HashMap;
 
 public class Adivinanza extends AppCompatActivity {
 
-    TextView puntos, monedas, categoria, nivel;
+    TextView puntos, monedas, categoria, nivel, usuarioI;
     Button atras, pista, resolver, comprobar;
     EditText respuesta;
 
@@ -95,7 +95,17 @@ public class Adivinanza extends AppCompatActivity {
         }
 
         categoria.setText(cat.toString());
-        nivel.setText("Nivel " + num_niv.toString());
+
+        if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")) {
+
+            nivel.setText("Nivel " + num_niv.toString());
+
+        }else{
+            nivel.setText("Level " + num_niv.toString());
+        }
+
+        usuarioI = (TextView) findViewById(R.id.txtIdentificado);
+        usuarioI.setText(usuario);
 
         mostrarPuntosYMonedas();
 
@@ -123,9 +133,17 @@ public class Adivinanza extends AppCompatActivity {
                     int im = getResources().getIdentifier(i , "drawable", context.getPackageName());
                     image.setImageResource(im);
 
-                    AlertDialog.Builder builder =
+                    String m = "";
+                    if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")){
+                        m = "Imagen de la pista";
+                    }else{
+                        m = "Clue image";
+                    }
+
+
+                        AlertDialog.Builder builder =
                             new AlertDialog.Builder(Adivinanza.this).
-                                    setMessage("Imagen de la pista").
+                                    setMessage(m).
                                     setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
@@ -168,11 +186,26 @@ public class Adivinanza extends AppCompatActivity {
                             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                         }
 
-                        //Mostramos el dialog indicando que el usuario ha fallado
+                        String m1 = "";
+                        String m2 = "";
+                        String m3 = "";
+
+                        if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")){
+                            m1 = "Resolver";
+                            m2 = "¿Estás segur@ de que quieres resolver? Te costará 20 monedas.";
+                            m3 = "Sí";
+                        }else{
+                            m1 = "Solve";
+                            m2 = "Are you sure you want to solve it? It will cost you 20 coins.";
+                            m3 = "Yes";
+                        }
+
+
+                            //Mostramos el dialog indicando que el usuario ha fallado
                         AlertDialog.Builder alertdialog = new AlertDialog.Builder(Adivinanza.this);
-                        alertdialog.setTitle("Resolver");
-                        alertdialog.setMessage("¿Estás segur@ de que quieres resolver? Te costará 20 monedas.");
-                        alertdialog.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                        alertdialog.setTitle(m1);
+                        alertdialog.setMessage(m2);
+                        alertdialog.setPositiveButton(m3, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.cancel();
@@ -191,11 +224,28 @@ public class Adivinanza extends AppCompatActivity {
                         alertdialog.show();
 
                     } else {
-                        Toast.makeText(getApplicationContext(), "No tienes monedas suficientes para poder resolver. " +
-                                "Resuelve otros niveles para así conseguir más monedas", Toast.LENGTH_SHORT).show();
+
+                        String m = "";
+                        if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")){
+                            m = "No tienes monedas suficientes para poder resolver. " +
+                                    "Resuelve otros niveles para así conseguir más monedas";
+                        }else{
+                            m = "You don't have enough coins to solve it. " +
+                                    "Finish other levels and earn more coins";
+                        }
+
+                            Toast.makeText(getApplicationContext(), m, Toast.LENGTH_SHORT).show();
                     }
                 }else{
-                    Toast.makeText(getApplicationContext(), "Este nivel ya está resuelto.", Toast.LENGTH_SHORT).show();
+
+                    String m = "";
+                    if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")){
+                        m = "Este nivel ya está resuelto";
+                    }else{
+                        m = "This level is already solved";
+                    }
+
+                    Toast.makeText(getApplicationContext(), m, Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -209,8 +259,17 @@ public class Adivinanza extends AppCompatActivity {
                 if(!resuelto) {
                     if (pistasUtilizadas == 5) {
                         //Crear toast
-                        Toast.makeText(getApplicationContext(), "Ya has abierto todas las pistas disponibles." +
-                                "Piensa bien la respuesta, y si te rindes resuélvela pagando 20 monedas.", Toast.LENGTH_SHORT).show();
+
+                        String m = "";
+                        if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")){
+                            m = "Ya has abierto todas las pistas disponibles. " +
+                                    "Piensa bien la respuesta, y si te rindes resuélvela pagando 20 monedas.";
+                        }else{
+                            m = "You have already unlocked all the available clues. " +
+                                    "Think again the answer, and if you don't know it solve it paying 20 coins.";
+                        }
+
+                        Toast.makeText(getApplicationContext(), m, Toast.LENGTH_SHORT).show();
                     } else {
                         pistasUtilizadas++;
                         pistasAbiertas = actualizarListaPistas();
@@ -227,7 +286,15 @@ public class Adivinanza extends AppCompatActivity {
 
                     }
                 }else{
-                    Toast.makeText(getApplicationContext(), "Este nivel ya está resuelto.", Toast.LENGTH_SHORT).show();
+
+                    String m = "";
+                    if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")){
+                        m = "Este nivel ya está resuelto";
+                    }else{
+                        m = "This level is already solved";
+                    }
+
+                    Toast.makeText(getApplicationContext(), m, Toast.LENGTH_SHORT).show();
                 }
 
 
@@ -242,8 +309,17 @@ public class Adivinanza extends AppCompatActivity {
                 if(!resuelto) {
                     //Recogemos lo que el usuario ha escrito y comprobamos la respuesta
                     if (respuesta.getText().toString().equals("")) {
-                        Toast.makeText(getApplicationContext(), "Debes escribir algo para comprobar la respuesta." +
-                                "Pero asegúrate bien, que cada error te resta 2 puntos.", Toast.LENGTH_SHORT).show();
+
+                        String m = "";
+                        if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")){
+                            m = "Debes escribir algo para comprobar la respuesta." +
+                                    "Pero asegúrate bien, que cada error te resta 2 puntos.";
+                        }else{
+                            m = "You must write something to check the answer. " +
+                                    "But think about it carefully, each error takes 2 points away.";
+                        }
+
+                        Toast.makeText(getApplicationContext(), m, Toast.LENGTH_SHORT).show();
                     } else {
 
                         if (respuesta.getText().toString().equalsIgnoreCase(niv)) {
@@ -258,10 +334,21 @@ public class Adivinanza extends AppCompatActivity {
                             //Calculamos los puntos
                             int pm = calcularPuntosMonedas();
 
+                            String m1 = "";
+                            String m2 = "";
+                            if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")){
+                                m1 = "HAS ACERTADO";
+                                m1 = "Enhorabuena!! Has ganado " + pm + " puntos y " + pm + " monedas";
+                            }else{
+                                m1 = "YOU GUESSED IT";
+                                m2 = "Congratulations!! You earned " + pm + " points and " + pm + " coins";
+                            }
+
+
                             //Mostramos el dialog indicando que el usuario ha acertado
                             AlertDialog.Builder alertdialog = new AlertDialog.Builder(Adivinanza.this);
-                            alertdialog.setTitle("HAS ACERTADO");
-                            alertdialog.setMessage("Enhorabuena!! Has ganado " + pm + " puntos y " + pm + " monedas");
+                            alertdialog.setTitle(m1);
+                            alertdialog.setMessage(m2);
                             alertdialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
@@ -321,10 +408,21 @@ public class Adivinanza extends AppCompatActivity {
                                 imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                             }
 
+                            String m1 = "";
+                            String m2 = "";
+                            if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")){
+                                m1 = "HAS FALLADO";
+                                m1 = "Lo siento! Prueba con otra cosa. (Recuerda que debes escribir las tildes correctamente).";
+                            }else{
+                                m1 = "YOU FAILED";
+                                m2 = "I'm sorry! Try another thing.";
+                            }
+
+
                             //Mostramos el dialog indicando que el usuario ha fallado
                             AlertDialog.Builder alertdialog = new AlertDialog.Builder(Adivinanza.this);
-                            alertdialog.setTitle("HAS FALLADO");
-                            alertdialog.setMessage("Lo siento! Prueba con otra cosa. (Recuerda que debes escribir las tildes correctamente).");
+                            alertdialog.setTitle(m1);
+                            alertdialog.setMessage(m2);
                             alertdialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
@@ -350,7 +448,16 @@ public class Adivinanza extends AppCompatActivity {
 
                     }
                 }else{
-                    Toast.makeText(getApplicationContext(), "Este nivel ya está resuelto.", Toast.LENGTH_SHORT).show();
+
+                    String m = "";
+                    if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")){
+                        m = "Este nivel ya está resuelto";
+                    }else{
+                        m = "This level is already solved";
+                    }
+
+                    Toast.makeText(getApplicationContext(), m, Toast.LENGTH_SHORT).show();
+
                 }
             }
         });
@@ -476,6 +583,11 @@ public class Adivinanza extends AppCompatActivity {
     private String[] obtenerPistas(){
 
         InputStream is = this.getResources().openRawResource(R.raw.data_es);
+
+        if(String.valueOf(getResources().getConfiguration().locale).equals("en")){
+            is = this.getResources().openRawResource(R.raw.data_en);
+        }
+
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 
         String[] p = new String[5];
@@ -579,8 +691,19 @@ public class Adivinanza extends AppCompatActivity {
 
         //Mostramos el dialog indicando que el usuario ha fallado
         AlertDialog.Builder alertdialog=new AlertDialog.Builder(Adivinanza.this);
-        alertdialog.setTitle("La respuesta correcta era... " + niv);
-        alertdialog.setMessage("Qué lástima que no hayas podido adivinarlo. Seguro que el próximo nivel lo acertarás a la primera :D");
+
+        String m1 = "";
+        String m2 = "";
+        if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")){
+            m1 = "La respuesta correcta era...";
+            m2 = "Qué lástima que no hayas podido adivinarlo. Seguro que el próximo nivel lo acertarás a la primera :D";
+        }else{
+            m1 = "The correct answer was...";
+            m2 = "What a shame, you couldn't guess it. I'm sure you will rock next level :D";
+        }
+
+        alertdialog.setTitle(m1 + " " + niv);
+        alertdialog.setMessage(m2);
         alertdialog.setPositiveButton("OK", new DialogInterface.OnClickListener(){
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -705,10 +828,24 @@ public class Adivinanza extends AppCompatActivity {
     //Método que se encarga de visualizar un Dialog cuando el usuario le da al botón de atrás de su teléfono
     public void onBackPressed() {
 
+        String texto1 = "";
+        String texto2 = "";
+        String texto3 = "";
+
+        if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")){
+            texto1 = "Salir";
+            texto2 = "¿Estás segur@ de que quieres cerrar sesión?";
+            texto3 = "Sí";
+        }else{
+            texto1 = "Exit";
+            texto2 = "Are you sure you want to log out?";
+            texto3 = "Yes";
+        }
+
         AlertDialog.Builder alertdialog=new AlertDialog.Builder(this);
-        alertdialog.setTitle("Salir");
-        alertdialog.setMessage("¿Estás segur@ de que quieres cerrar sesión?");
-        alertdialog.setPositiveButton("Sí", new DialogInterface.OnClickListener(){
+        alertdialog.setTitle(texto1);
+        alertdialog.setMessage(texto2);
+        alertdialog.setPositiveButton(texto3, new DialogInterface.OnClickListener(){
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //    Menu.super.onBackPressed();

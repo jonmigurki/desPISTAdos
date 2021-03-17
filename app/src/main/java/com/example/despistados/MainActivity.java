@@ -63,7 +63,15 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(i);
                     finish();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Has introducido mal algún campo. Vuelve a intentarlo.", Toast.LENGTH_SHORT).show();
+
+                    String m = "";
+                    if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")){
+                        m = "Has introducido mal algún campo. Vuelve a intentarlo.";
+                    }else{
+                        m = "You have written something wrong. Try it again.";
+                    }
+
+                    Toast.makeText(getApplicationContext(), m, Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -102,10 +110,25 @@ public class MainActivity extends AppCompatActivity {
 
     public void onBackPressed() {
 
+        String m1 = "";
+        String m2 = "";
+        String m3 = "";
+
+        if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")){
+            m1 = "Salir";
+            m2 = "¿Estás segur@ de que quieres salir?";
+            m3 = "Sí";
+        }else{
+            m1 = "Exit";
+            m2 = "Are you sure you want to exit?";
+            m3 = "Yes";
+        }
+
+
         AlertDialog.Builder alertdialog=new AlertDialog.Builder(this);
-        alertdialog.setTitle("Salir");
-        alertdialog.setMessage("¿Estás segur@ de que quieres salir?");
-        alertdialog.setPositiveButton("Sí", new DialogInterface.OnClickListener(){
+        alertdialog.setTitle(m1);
+        alertdialog.setMessage(m2);
+        alertdialog.setPositiveButton(m3, new DialogInterface.OnClickListener(){
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 MainActivity.super.onBackPressed();

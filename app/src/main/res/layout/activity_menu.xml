@@ -58,8 +58,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="42dp"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/coda"
                 android:gravity="center"
-                android:text="Escoge una categoría"
+                android:text="@string/txtEligeC"
                 android:textSize="14sp" />
 
             <ListView
@@ -80,7 +81,7 @@
                 android:drawableLeft="@drawable/compartir"
                 android:scaleX="1"
                 android:scaleY="1"
-                android:text="Compartir"
+                android:text="@string/btnCompartir"
                 app:backgroundTint="#3F51B5" />
         </LinearLayout>
 

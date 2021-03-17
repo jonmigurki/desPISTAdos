@@ -9,6 +9,7 @@
         android:id="@+id/etiqueta"
         android:layout_width="359dp"
         android:layout_height="57dp"
+        android:fontFamily="@font/coda"
         android:gravity="center"
         android:textSize="14sp"
         android:textStyle="bold"

@@ -10,6 +10,7 @@
         android:layout_width="349dp"
         android:layout_height="50dp"
         android:layout_marginTop="4dp"
+        android:fontFamily="@font/coda"
         android:gravity="center"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"

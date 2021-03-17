@@ -104,25 +104,25 @@ Monuments of the world
 The statue of liberty;Taj Mahal
 
 The statue of liberty
-1;Fue construido el 28 de octubre de 1886
-2;Monumento cuyo color original era bronce
-3;Se encuentra en la desembocadura del río Hudson
-4;Se trata de la escultura de una mujer
+1;It was built on October 28th 1886
+2;Its original color was bronze
+3;It is located in the Hudson river mouth
+4;It is a woman sculpture
 5;Press here to see the image clue
 
 Taj Mahal
-1;Este monumento en urdu significa "Corona de los palacios"
-2;Se trata de un mausoleo
-3;Sirvió de inspiración para el palacio de "Aladdin"
-4;Se encuentra en India
+1;This monument in urdu means "Crown of palaces"
+2;It is a mauseleum
+3;It inspired the palace in "Aladdin"
+4;It is located in India
 5;Press here to see the image clue
 
-Inventos y descubrimientos famosos
+Famous inventions and discoveries
 Fire;
 
 Fire
-1;Descubrimiento del año 500.000 a.C
-2;Fue muy importante en la antigüedad clásica
-3;Está compuesto por miles de partículas
-4;La regeneración del ave Fénix se debe gracias a este descubrimiento
+1;Discovery from the year 500.000 B.C
+2;It was very important in Classic Ancient Times
+3;It is formed by thousands of particles
+4;The Phoenix regeneration occurs thanks to this discovery
 5;Press here to see the image clue
