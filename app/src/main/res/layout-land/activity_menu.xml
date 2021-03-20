@@ -9,19 +9,18 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:id="@+id/layoutNorte"
-            android:layout_width="match_parent"
-            android:layout_height="98dp"
-            android:background="#E3E6F4">
+            android:layout_width="226dp"
+            android:layout_height="match_parent"
+            android:background="#E3E6F4"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/txtIdentificado"
-                android:layout_width="190dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
                 android:drawableLeft="@drawable/usuario"
                 android:gravity="center_vertical"
                 android:paddingLeft="10dp"
@@ -30,26 +29,43 @@
 
             <TextView
                 android:id="@+id/txtPuntos1"
-                android:layout_width="91dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
                 android:drawableLeft="@drawable/puntos"
                 android:gravity="center_vertical"
+                android:paddingLeft="10dp"
                 android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/txtMonedas1"
-                android:layout_width="79dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
                 android:gravity="center_vertical"
+                android:paddingLeft="10dp"
                 android:textSize="24sp"
                 app:drawableLeftCompat="@drawable/monedas" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+            <Button
+                android:id="@+id/btnCompartir"
+                style="@style/boton"
+                android:layout_width="172dp"
+                android:layout_height="51dp"
+                android:layout_gravity="center_horizontal"
+                android:background="#FFFFFF"
+                android:drawableLeft="@drawable/compartir"
+                android:scaleX="1"
+                android:scaleY="1"
+                android:text="@string/btnCompartir" />
+
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="363dp"
-            android:layout_height="540dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:background="#C6C9DD"
             android:orientation="vertical">
 
@@ -57,7 +73,6 @@
                 android:id="@+id/txtEligeN"
                 android:layout_width="match_parent"
                 android:layout_height="42dp"
-                android:layout_marginTop="10dp"
                 android:fontFamily="@font/coda"
                 android:gravity="center"
                 android:text="@string/txtEligeC"
@@ -65,24 +80,11 @@
 
             <ListView
                 android:id="@+id/lista1"
-                android:layout_width="match_parent"
-                android:layout_height="331dp"
-                android:layout_marginTop="8dp">
+                android:layout_width="376dp"
+                android:layout_height="299dp"
+                android:layout_gravity="center">
 
             </ListView>
-
-            <Button
-                android:id="@+id/btnCompartir"
-                android:layout_width="172dp"
-                android:layout_height="51dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="28dp"
-                android:background="#FFFFFF"
-                android:drawableLeft="@drawable/compartir"
-                android:scaleX="1"
-                android:scaleY="1"
-                android:text="@string/btnCompartir"
-                style="@style/boton" />
         </LinearLayout>
 
     </LinearLayout>

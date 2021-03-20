@@ -33,45 +33,44 @@ import java.util.HashMap;
 
 public class Adivinanza extends AppCompatActivity {
 
+    //Actividad que se encarga de crear la ventana de adivinar
+
+    //Los elementos del layout
     TextView puntos, monedas, categoria, nivel, usuarioI;
     Button atras, pista, resolver, comprobar;
     EditText respuesta;
 
+    //Contexto de la aplicación
     Context context;
 
+    //Variables que guardan la información acerca del usuario identificado, la categoría escogida, el id de la categoría escogida,
+    // el nivel escogido, el id del nivel escogido y el número de niveles que se encuentran en la categoría, respectivamente
     String usuario, cat, num_cat, niv, num_niv, num_niveles;
 
     //Pistas que el usuario ha utilizado -> al comienzo 1
     int pistasUtilizadas = 1;
 
+    //Lista de pistas que el usuario ha abierto hasta el momento
     String[] pistasAbiertas;
+    //Lista de pistas totales que ese nivel tiene
     String[] pistas;
 
+    //Puntos y monedas actuales del usuario
     int puntosUsuario;
     int monedasUsuario;
 
+    //El usuario ya ha resuelto este nivel?
     boolean resuelto;
-
-
-    /*Además, cada vez que abra una pista necesitaré guardarlo en la BD, para cuando salga y entre de nuevo
-    Por lo tanto, nada más entrar en esta actividad, lo primero que tendré que hacer es comprobar que el
-    usuario nunca haya entrado aquí. En la BD compruebo en el JSON si esta categoría y este nivel se encuentran;
-    si se encuentran mirar el booleano (true si resuelto, false si no) y en el caso de que sea false, mirar
-    cuántas pistas ha abierto hasta ahora. Después, en el ListView actualizo el número de pistas.
-
-    https://stackoverflow.com/questions/4540754/how-do-you-dynamically-add-elements-to-a-listview-on-android
-
-                                        adapter.add("pista");
-    */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adivinanza);
 
-
+        //Obtenemos el contexto de la aplicación y lo actualizamos a la variable global
         context = this.getApplicationContext();
 
+        //Obtenemos los elementos del layout y los inicializamos
         puntos = (TextView) findViewById(R.id.txtPuntos1);
         monedas = (TextView) findViewById(R.id.txtMonedas1);
         categoria = (TextView) findViewById(R.id.txtCategoria);
@@ -84,6 +83,7 @@ public class Adivinanza extends AppCompatActivity {
 
         respuesta = (EditText) findViewById(R.id.txtRespuesta);
 
+        //Obtenemos la información proveniente de la anterior actividad
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             usuario = extras.getString("usuario");
@@ -94,54 +94,74 @@ public class Adivinanza extends AppCompatActivity {
             num_niveles = extras.getString("num_niveles");
         }
 
+        //Escribimos la categoría y nivel escogidos en el layout
         categoria.setText(cat.toString());
 
-        if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")) {
+        if (String.valueOf(getResources().getConfiguration().locale).contains("es")) {
 
             nivel.setText("Nivel " + num_niv.toString());
 
-        }else{
+        } else {
             nivel.setText("Level " + num_niv.toString());
         }
 
+        //Y escribimos el usuario identificado y mostramos los puntos y monedas de éste
         usuarioI = (TextView) findViewById(R.id.txtIdentificado);
         usuarioI.setText(usuario);
-
         mostrarPuntosYMonedas();
 
-        resuelto();     //COMPROBAMOS SI ESTE NIVEL ESTÁ RESUELTO O NO
+        //Comprobamos si este nivel está resuelto o no y actualizamos el booleano a la variable global
+        resuelto();
 
         //Método que se encarga de comprobar cuántas pistas están abiertas en este nivel
         obtenerDatosUsuario();
 
+        //Cargamos las pistas
         pistas = obtenerPistas();
 
+        //Cargamos las pistas abiertas hasta el momento
         pistasAbiertas = actualizarListaPistas();
 
         //Accedemos al ListView y creamos el adaptador que visualizará las pistas cargadas
         ListView lista = (ListView) findViewById(R.id.lista3);
-        AdaptadorPistas eladap= new AdaptadorPistas(getApplicationContext(),pistasAbiertas);
+        AdaptadorPistas eladap = new AdaptadorPistas(getApplicationContext(), pistasAbiertas);
         lista.setAdapter(eladap);
 
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(position==4){
+
+                //Si el usuario pulsa el elemento 4 del ListView (pista nº 5 => Imagen pista) se crea un AlertDialog mostrando la imagen
+                if (position == 4) {
+
+                    /*
+                        Basado en el código extraído de Stack Overflow
+                        Pregunta: https://stackoverflow.com/questions/6276501/how-to-put-an-image-in-an-alertdialog-android
+                        Autor: https://stackoverflow.com/users/2160667/miguel-rivero
+                        Modificado por Jon Miguel para incluir los textos deseados al AlertDialog
+                     */
+
+                    /*
+                        Basado en el código extraído de Stack Overflow
+                        Pregunta: https://stackoverflow.com/questions/45521227/is-it-possible-to-access-r-drawable-variables-dynamically
+                        Autor: https://stackoverflow.com/users/5131801/mohammadreza-eram
+                        Modificado por Jon Miguel para obtener los resources de imagenes en drawable
+                     */
 
                     ImageView image = new ImageView(Adivinanza.this);
                     String i = "imagen" + num_cat + num_niv;
-                    int im = getResources().getIdentifier(i , "drawable", context.getPackageName());
+                    int im = getResources().getIdentifier(i, "drawable", context.getPackageName());
                     image.setImageResource(im);
 
                     String m = "";
-                    if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")){
+                    if (String.valueOf(getResources().getConfiguration().locale).contains("es")) {
                         m = "Imagen de la pista";
-                    }else{
+                    } else {
                         m = "Clue image";
                     }
 
 
-                        AlertDialog.Builder builder =
+                    AlertDialog.Builder builder =
                             new AlertDialog.Builder(Adivinanza.this).
                                     setMessage(m).
                                     setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -159,6 +179,7 @@ public class Adivinanza extends AppCompatActivity {
         });
 
 
+        //Si el usuario pulsa el botón "Atrás" se vuelve a la anterior actividad
         atras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -173,11 +194,13 @@ public class Adivinanza extends AppCompatActivity {
         });
 
 
+        //Si el usuario pulsa el botón "Resolver" comprueba cuántas monedas le quedan. Si puede resolver por 20 monedas,
+        //aparece un AlertDialog preguntando por confirmación. Si el usuario pulsa sí se resuelve el nivel, y si pulsa no se cierra.
         resolver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(!resuelto) {
+                if (!resuelto) {
                     if (monedasUsuario >= 20) {
                         //Bajar teclado
                         View view = Adivinanza.this.getCurrentFocus();
@@ -190,18 +213,18 @@ public class Adivinanza extends AppCompatActivity {
                         String m2 = "";
                         String m3 = "";
 
-                        if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")){
+                        if (String.valueOf(getResources().getConfiguration().locale).contains("es")) {
                             m1 = "Resolver";
                             m2 = "¿Estás segur@ de que quieres resolver? Te costará 20 monedas.";
                             m3 = "Sí";
-                        }else{
+                        } else {
                             m1 = "Solve";
                             m2 = "Are you sure you want to solve it? It will cost you 20 coins.";
                             m3 = "Yes";
                         }
 
 
-                            //Mostramos el dialog indicando que el usuario ha fallado
+                        //Mostramos el dialog indicando que el usuario ha fallado
                         AlertDialog.Builder alertdialog = new AlertDialog.Builder(Adivinanza.this);
                         alertdialog.setTitle(m1);
                         alertdialog.setMessage(m2);
@@ -226,22 +249,22 @@ public class Adivinanza extends AppCompatActivity {
                     } else {
 
                         String m = "";
-                        if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")){
+                        if (String.valueOf(getResources().getConfiguration().locale).contains("es")) {
                             m = "No tienes monedas suficientes para poder resolver. " +
                                     "Resuelve otros niveles para así conseguir más monedas";
-                        }else{
+                        } else {
                             m = "You don't have enough coins to solve it. " +
                                     "Finish other levels and earn more coins";
                         }
 
-                            Toast.makeText(getApplicationContext(), m, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), m, Toast.LENGTH_SHORT).show();
                     }
-                }else{
+                } else {
 
                     String m = "";
-                    if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")){
+                    if (String.valueOf(getResources().getConfiguration().locale).contains("es")) {
                         m = "Este nivel ya está resuelto";
-                    }else{
+                    } else {
                         m = "This level is already solved";
                     }
 
@@ -252,19 +275,20 @@ public class Adivinanza extends AppCompatActivity {
         });
 
 
+        //Se añade una nueva pista al ListView y actualizamos las variables pistasUtilizadas y pistasAbiertas
         pista.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(!resuelto) {
+                if (!resuelto) {
                     if (pistasUtilizadas == 5) {
                         //Crear toast
 
                         String m = "";
-                        if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")){
+                        if (String.valueOf(getResources().getConfiguration().locale).contains("es")) {
                             m = "Ya has abierto todas las pistas disponibles. " +
                                     "Piensa bien la respuesta, y si te rindes resuélvela pagando 20 monedas.";
-                        }else{
+                        } else {
                             m = "You have already unlocked all the available clues. " +
                                     "Think again the answer, and if you don't know it solve it paying 20 coins.";
                         }
@@ -276,7 +300,7 @@ public class Adivinanza extends AppCompatActivity {
                         AdaptadorPistas adap = new AdaptadorPistas(getApplicationContext(), pistasAbiertas);
                         lista.setAdapter(adap);
 
-                        //ACTUALIZAMOS LA BASE DE DATOS PARA GUARDAR EL NUMERO DE PISTAS UTILIZADAS
+                        //Actualizamos la base de datos para guardar el número de pistas utilizadas
                         BD GestorDB = new BD(context, "BD", null, 1);
                         SQLiteDatabase bd = GestorDB.getWritableDatabase();
 
@@ -285,12 +309,12 @@ public class Adivinanza extends AppCompatActivity {
                                 "CATEGORIA = '" + num_cat + "' AND NIVEL = '" + num_niv + "'");
 
                     }
-                }else{
+                } else {
 
                     String m = "";
-                    if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")){
+                    if (String.valueOf(getResources().getConfiguration().locale).contains("es")) {
                         m = "Este nivel ya está resuelto";
-                    }else{
+                    } else {
                         m = "This level is already solved";
                     }
 
@@ -302,19 +326,20 @@ public class Adivinanza extends AppCompatActivity {
         });
 
 
+        //Se comprueba que lo que ha escrito el usuario es la solución correcta
         comprobar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(!resuelto) {
+                if (!resuelto) {
                     //Recogemos lo que el usuario ha escrito y comprobamos la respuesta
                     if (respuesta.getText().toString().equals("")) {
 
                         String m = "";
-                        if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")){
+                        if (String.valueOf(getResources().getConfiguration().locale).contains("es")) {
                             m = "Debes escribir algo para comprobar la respuesta." +
                                     "Pero asegúrate bien, que cada error te resta 2 puntos.";
-                        }else{
+                        } else {
                             m = "You must write something to check the answer. " +
                                     "But think about it carefully, each error takes 2 points away.";
                         }
@@ -322,9 +347,10 @@ public class Adivinanza extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), m, Toast.LENGTH_SHORT).show();
                     } else {
 
+                        //Ignoramos las mayúsculas en la respuesta
                         if (respuesta.getText().toString().equalsIgnoreCase(niv)) {
 
-                            //Bajar teclado
+                            //Bajamos el teclado del teléfono
                             View view = Adivinanza.this.getCurrentFocus();
                             if (view != null) {
                                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -336,10 +362,10 @@ public class Adivinanza extends AppCompatActivity {
 
                             String m1 = "";
                             String m2 = "";
-                            if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")){
+                            if (String.valueOf(getResources().getConfiguration().locale).contains("es")) {
                                 m1 = "HAS ACERTADO";
-                                m1 = "Enhorabuena!! Has ganado " + pm + " puntos y " + pm + " monedas";
-                            }else{
+                                m2 = "Enhorabuena!! Has ganado " + pm + " puntos y " + pm + " monedas";
+                            } else {
                                 m1 = "YOU GUESSED IT";
                                 m2 = "Congratulations!! You earned " + pm + " points and " + pm + " coins";
                             }
@@ -356,6 +382,7 @@ public class Adivinanza extends AppCompatActivity {
                                 }
                             });
 
+                            //Si el usuario quiere compartir el resultado
                             alertdialog.setNeutralButton("Compartir", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
@@ -367,18 +394,21 @@ public class Adivinanza extends AppCompatActivity {
                                     intent.setPackage("com.whatsapp");
                                     startActivity(intent);
 
-                                        }
-                                    });
+                                }
+                            });
 
 
                             alertdialog.show();
 
+                            //Actualizamos los puntos y monedas del usuario
                             puntosUsuario = puntosUsuario + pm;
                             monedasUsuario = monedasUsuario + pm;
 
+                            //Las reescribimos en el layout
                             puntos.setText(String.valueOf(puntosUsuario));
                             monedas.setText(String.valueOf(monedasUsuario));
 
+                            //Si los puntos <0 => rojo /// si >=0 => negro
                             actualizarColorPuntos();
 
                             BD GestorDB = new BD(context, "BD", null, 1);
@@ -391,17 +421,18 @@ public class Adivinanza extends AppCompatActivity {
 
                             resuelto();
 
-
-
-                            //PRUEBA: NOTIFICACION CUANDO ACIERTO UNA ADIVINANZA
-
+                            //Comprobamos que se hayan finalizado todos los niveles de la categoría elegida para mostrar la notificación
                             mostrarNotificacion();
-
 
 
                         } else {
 
                             //Bajar teclado
+                            /*
+                                Extraído de Stack Overflow
+                                Pregunta: https://es.stackoverflow.com/questions/298/c%C3%B3mo-puedo-abrir-y-cerrar-el-teclado-virtual-soft-keyboard
+                                Autor: https://es.stackoverflow.com/users/95/jorgesys
+                             */
                             View view = Adivinanza.this.getCurrentFocus();
                             if (view != null) {
                                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -410,10 +441,10 @@ public class Adivinanza extends AppCompatActivity {
 
                             String m1 = "";
                             String m2 = "";
-                            if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")){
+                            if (String.valueOf(getResources().getConfiguration().locale).contains("es")) {
                                 m1 = "HAS FALLADO";
-                                m1 = "Lo siento! Prueba con otra cosa. (Recuerda que debes escribir las tildes correctamente).";
-                            }else{
+                                m2 = "Lo siento! Prueba con otra cosa. (Recuerda que debes escribir las tildes correctamente).";
+                            } else {
                                 m1 = "YOU FAILED";
                                 m2 = "I'm sorry! Try another thing.";
                             }
@@ -447,12 +478,12 @@ public class Adivinanza extends AppCompatActivity {
                         }
 
                     }
-                }else{
+                } else {
 
                     String m = "";
-                    if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")){
+                    if (String.valueOf(getResources().getConfiguration().locale).contains("es")) {
                         m = "Este nivel ya está resuelto";
-                    }else{
+                    } else {
                         m = "This level is already solved";
                     }
 
@@ -462,19 +493,9 @@ public class Adivinanza extends AppCompatActivity {
             }
         });
 
-
-
-
-/*
-
-        //Accedemos al ListView y creamos el adaptador que visualizará las categorías cargadas
-        ListView lista = (ListView) findViewById(R.id.lista3);
-        //En el adaptador le tengo que meter las pistas, PERO NO TODAS, sino LAS QUE ESTÁN ABIERTAS
-        AdaptadorNiveles eladap= new AdaptadorNiveles(getApplicationContext(),XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX);
-        lista.setAdapter(eladap);
-*/
     }
 
+    //Si los puntos son negativos, se visualizan en rojo
     private void actualizarColorPuntos(){
 
         if(puntosUsuario<0){
@@ -516,27 +537,9 @@ public class Adivinanza extends AppCompatActivity {
     }
 
 
+    //Si nunca se ha almacenado nada sobre este nivel (el usuario nunca ha entrado) se actualiza la base de datos
+    //indicando que el número de pistas utilizadas para este nivel es 1 (ya se ha abierto una)
     private void obtenerDatosUsuario(){
-
-        /*
-        1- Si es la primera vez que entra: (SELECT a la BD y mirar que esta categoría y este nivel NO están metidxs en el JSON)
-
-            -> Necesitamos hacer un UPDATE en la BD para meterle el siguiente JSON al usuario:
-                { [ { categoria: 1, nivel: 1, pistas: 1, resuelto = "False" } ] }
-           De esta manera, le indicamos que la primera pista ya ha sido descubierta
-
-        2- Si no es la primera vez (en la BD este nivel y categoria para este usuario estan)
-
-            2.1. Si resuelto=true --> un JDialog indicandole que ya lo ha resuelto con x pistas
-
-            2.1. Si resuelto=false --> Miro por cuántas pistas va y se lo paso como parámetro al Adaptador para que actualice el ListView.
-         */
-
-
-        //1. Hacemos SELECT de BD para ver si este usuario, esta categoria y este nivel se encuentran
-                //a) Si están --> Saco el número de pistas que ha abierto
-                //b) Si no están --> Hago un INSERT para meter todos los datos
-
 
         BD GestorDB = new BD (context, "BD", null, 1);
         SQLiteDatabase bd = GestorDB.getWritableDatabase();
@@ -580,6 +583,7 @@ public class Adivinanza extends AppCompatActivity {
     }
 
 
+    //Se lee el fichero .txt y se obtienen las pistas en base a la categoría y el nivel elegido
     private String[] obtenerPistas(){
 
         InputStream is = this.getResources().openRawResource(R.raw.data_es);
@@ -634,6 +638,7 @@ public class Adivinanza extends AppCompatActivity {
 
     }
 
+
     private String[] actualizarListaPistas(){
 
         String[] p = new String[pistasUtilizadas];
@@ -650,6 +655,7 @@ public class Adivinanza extends AppCompatActivity {
     }
 
 
+    //Método que se encarga de calcular los puntos y monedas para el usuario en base a las pistas utilizadas
     private int calcularPuntosMonedas(){
 
         switch(pistasUtilizadas) {
@@ -694,7 +700,7 @@ public class Adivinanza extends AppCompatActivity {
 
         String m1 = "";
         String m2 = "";
-        if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")){
+        if(String.valueOf(getResources().getConfiguration().locale).contains("es")){
             m1 = "La respuesta correcta era...";
             m2 = "Qué lástima que no hayas podido adivinarlo. Seguro que el próximo nivel lo acertarás a la primera :D";
         }else{
@@ -764,7 +770,7 @@ public class Adivinanza extends AppCompatActivity {
     }
 
 
-//Método que se va a encargar de mostrar una notificacion si todos los niveles de una categoría han sido adivinados
+    //Método que se va a encargar de mostrar una notificación si todos los niveles de una categoría han sido adivinados
     private void mostrarNotificacion(){
 
         BD GestorDB = new BD(context, "BD", null, 1);
@@ -832,7 +838,7 @@ public class Adivinanza extends AppCompatActivity {
         String texto2 = "";
         String texto3 = "";
 
-        if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")){
+        if(String.valueOf(getResources().getConfiguration().locale).contains("es")){
             texto1 = "Salir";
             texto2 = "¿Estás segur@ de que quieres cerrar sesión?";
             texto3 = "Sí";

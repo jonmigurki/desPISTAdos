@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    //Actividad que se encarga de crear la ventana principal de la aplicación
+
     Button entrar;
     Button registrar;
     EditText usuario;
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
 
                     String m = "";
-                    if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")){
+                    if(String.valueOf(getResources().getConfiguration().locale).contains("es")){
                         m = "Has introducido mal algún campo. Vuelve a intentarlo.";
                     }else{
                         m = "You have written something wrong. Try it again.";
@@ -88,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent i = new Intent(MainActivity.this, Registro.class);
                 startActivity(i);
-
+                finish();
             }
         });
 
@@ -108,13 +110,20 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    /*
+            Basado en el código extraído de Stack Overflow
+            Pregunta: https://stackoverflow.com/questions/45729852/android-check-if-back-button-was-pressed
+            Autor: https://stackoverflow.com/users/4586742/bob
+            Modificado por Jon Miguel para adaptar las funcionalidades y mensajes deseados
+        */
+
     public void onBackPressed() {
 
         String m1 = "";
         String m2 = "";
         String m3 = "";
 
-        if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")){
+        if(String.valueOf(getResources().getConfiguration().locale).contains("es")){
             m1 = "Salir";
             m2 = "¿Estás segur@ de que quieres salir?";
             m3 = "Sí";

@@ -22,6 +22,9 @@ import java.io.InputStreamReader;
 
 public class Nivel extends AppCompatActivity {
 
+    //Actividad que se encarga de crear la ventana de los niveles
+
+    //Obtenemos los elementos del layout
     String usuario;
     String categoria;
     String num_categoria;
@@ -37,7 +40,7 @@ public class Nivel extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nivel);
 
-
+        //Obtenemos las variables de la anterior actividad
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             usuario = extras.getString("usuario");
@@ -57,18 +60,18 @@ public class Nivel extends AppCompatActivity {
         monedas = (TextView) findViewById(R.id.txtMonedas1);
         mostrarPuntosYMonedas();
 
-
+        //Cargamos los niveles dada la categoría elegida
         String [] niveles = cargarNiveles(categoria);
 
         String idioma = "";
-        if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")){
+        if(String.valueOf(getResources().getConfiguration().locale).contains("es")){
             idioma = "español";
         }else{
             idioma = "inglés";
         }
 
 
-            //Accedemos al ListView y creamos el adaptador que visualizará los niveles cargados
+            //Accedemos al ListView y creamos el adaptador que visualizará los niveles cargados (además le pasamos el idioma)
         ListView lista = (ListView) findViewById(R.id.lista2);
         AdaptadorNiveles eladap= new AdaptadorNiveles(getApplicationContext(),niveles,idioma);
         lista.setAdapter(eladap);
@@ -106,7 +109,7 @@ public class Nivel extends AppCompatActivity {
 
                 String texto = "";
 
-                if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")){
+                if(String.valueOf(getResources().getConfiguration().locale).contains("es")){
                     texto = "Estoy jugando a desPISTAdos y es súper entretenido. ¡Corre y descárgatelo!";
                 }else{
                     texto = "I'm playing desPISTAdos and it's super entertaining. Go and download it!";
@@ -212,7 +215,7 @@ public class Nivel extends AppCompatActivity {
         String texto2 = "";
         String texto3 = "";
 
-        if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")){
+        if(String.valueOf(getResources().getConfiguration().locale).contains("es")){
             texto1 = "Salir";
             texto2 = "¿Estás segur@ de que quieres cerrar sesión?";
             texto3 = "Sí";

@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 
 public class BD extends SQLiteOpenHelper {
 
+    //Clase que se encarga de crear la base de datos y las dos tablas 'USUARIOS' y 'LOGROS'
 
     public BD(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);

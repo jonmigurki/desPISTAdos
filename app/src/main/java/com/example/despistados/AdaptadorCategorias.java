@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 public class AdaptadorCategorias extends BaseAdapter {
 
+    //Clase que se encarga de incluir todas las categorías en el ListView
 
     private Context contexto;
     private LayoutInflater inflater;

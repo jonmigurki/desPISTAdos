@@ -77,9 +77,9 @@ Wolfgang Amadeus Mozart
 5;Pulsa aquí para ver la imagen pista
 
 Países del mundo
-Magascar;Grecia;Japón
+Madagascar;Grecia;Japón
 
-Magascar
+Madagascar
 1;País cuya moneda es el Ariary
 2;Su capital es Antananarivo
 3;Se encuentra situado al sureste de África

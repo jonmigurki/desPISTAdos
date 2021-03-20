@@ -25,22 +25,22 @@ import java.util.Locale;
 
 public class Menu extends AppCompatActivity {
 
- //   String[] categorias = new String[5];
+    //Actividad que se encarga de crear la ventana del menú (cateogrías)
 
+    //Obtenemos los elementos del layout
     TextView usuario, puntos, monedas;
-
     Button compartir;
 
     Context context;
 
-    String user;        //Variable global que guarda el nombre del usuario
+    String user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         //Cargamos las categorías
         String[] categorias = cargarCategorias();
-        
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
@@ -54,7 +54,7 @@ public class Menu extends AppCompatActivity {
 
                 String texto = "";
 
-                if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")){
+                if(String.valueOf(getResources().getConfiguration().locale).contains("es")){
                     texto = "Estoy jugando a desPISTAdos y es súper entretenido. ¡Corre y descárgatelo!";
                 }else{
                     texto = "I'm playing desPISTAdos and it's super entertaining. Go and download it!";
@@ -117,12 +117,11 @@ public class Menu extends AppCompatActivity {
     //Método privado que se encarga de cargar las categorías leyendo el fichero de texto
     private String[] cargarCategorias() {
 
-        ArrayList<String> lc = new ArrayList<String>();
         String linea;
 
         InputStream is = this.getResources().openRawResource(R.raw.data_es);
 
-        if(String.valueOf(getResources().getConfiguration().locale).equals("en")){
+        if (String.valueOf(getResources().getConfiguration().locale).equals("en")) {
             is = this.getResources().openRawResource(R.raw.data_en);
         }
 
@@ -135,7 +134,6 @@ public class Menu extends AppCompatActivity {
             linea = reader.readLine();
 
             c = linea.split(";");
-
 
 
         } catch (IOException e) {
@@ -178,7 +176,7 @@ public class Menu extends AppCompatActivity {
         String texto2 = "";
         String texto3 = "";
 
-        if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")){
+        if(String.valueOf(getResources().getConfiguration().locale).contains("es")){
             texto1 = "Salir";
             texto2 = "¿Estás segur@ de que quieres cerrar sesión?";
             texto3 = "Sí";
@@ -211,6 +209,7 @@ public class Menu extends AppCompatActivity {
         alertdialog.show();
 
     }
+
 
 
 

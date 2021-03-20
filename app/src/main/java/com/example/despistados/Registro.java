@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 public class Registro extends AppCompatActivity {
 
+    //Actividad que se encarga de crear la ventana de registro
+
     EditText usuarioR, contrasenaR;
     Button btnRegistrarse;
 
@@ -26,6 +28,7 @@ public class Registro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
 
+        //Obtenemos los elementos del layout
         usuarioR = (EditText) findViewById(R.id.txtUsuarioR);
         contrasenaR = (EditText) findViewById(R.id.txtContrasenaR);
         btnRegistrarse = (Button) findViewById(R.id.btnRegistrarse);
@@ -33,22 +36,13 @@ public class Registro extends AppCompatActivity {
         context = this.getApplicationContext();
 
 
-        /*
-        PASOS:
-
-        1- Verificar que ningún campo está vacío
-        2- Comprobar que el usuario introducido está disponible
-        3- Registrar en la base de datos
-        4- Intent al menú
-         */
-
         btnRegistrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 String m1 = "";
                 String m2 = "";
-                if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")) {
+                if(String.valueOf(getResources().getConfiguration().locale).contains("es")){
                     m1 = "Debes rellenar los dos campos";
                     m2 = "Ya existe un usuario con ese nombre. Elige otro nombre";
                 }else{
@@ -78,7 +72,7 @@ public class Registro extends AppCompatActivity {
 
                     } else {
 
-                        //REALIZAMOS EL REGISTRO
+                        //Realizamos el registro
 
                         GestorDB = new BD(context, "BD", null, 1);
                         bd = GestorDB.getWritableDatabase();
@@ -101,8 +95,6 @@ public class Registro extends AppCompatActivity {
 
 
 
-
-
     //Método que se encarga de visualizar un Dialog cuando el usuario le da al botón de atrás de su teléfono
     public void onBackPressed() {
 
@@ -110,7 +102,7 @@ public class Registro extends AppCompatActivity {
         String texto2 = "";
         String texto3 = "";
 
-        if(String.valueOf(getResources().getConfiguration().locale).equals("es_ES")){
+        if(String.valueOf(getResources().getConfiguration().locale).contains("es")){
             texto1 = "Salir";
             texto2 = "¿Estás segur@ de que quieres cerrar sesión?";
             texto3 = "Sí";

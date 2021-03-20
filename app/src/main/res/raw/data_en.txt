@@ -77,9 +77,9 @@ Wolfgang Amadeus Mozart
 5;Press here to see the image clue
 
 Countries of the world
-Magascar;Greece;Japan
+Madagascar;Greece;Japan
 
-Magascar
+Madagascar
 1;Its currency is Ariary
 2;Its capital is Antananarivo
 3;It is located in the southeast of Africa

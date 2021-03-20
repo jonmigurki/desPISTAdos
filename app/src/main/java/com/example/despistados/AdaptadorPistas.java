@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 public class AdaptadorPistas extends BaseAdapter {
 
+    //Clase que se encarga de incluir todas las pistas en el ListView
+
     private Context contexto;
     private LayoutInflater inflater;
     private String[] pistas;
@@ -42,7 +44,11 @@ public class AdaptadorPistas extends BaseAdapter {
         convertView=inflater.inflate(R.layout.fila_pista,null);
         TextView categoria = (TextView) convertView.findViewById(R.id.etiqueta);
         categoria.setText(pistas[position]);
+
+        //Si la pista de la posición 4 (pista número 5 => Imagen)
+        // El texto ("Pulsa aquí para ver la imagen pista") lo ponga en cursiva
         if(position==4){categoria.setTypeface(categoria.getTypeface(), Typeface.ITALIC);}
+
         return convertView;
     }
 }
